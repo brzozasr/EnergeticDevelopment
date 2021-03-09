@@ -1,4 +1,5 @@
 ﻿using System;
+using EnergeticDevelopment.EnergyConsumers;
 using EnergeticDevelopment.EnergyPlants;
 using EnergeticDevelopment.Mines;
 using EnergeticDevelopment.Storage;
@@ -16,6 +17,9 @@ namespace EnergeticDevelopment
 
             var coalPlant = new CoalPlant();
             coalPlant.ProduceEnergy(singleton);
+
+            var newYork = new NewYork();
+            newYork.ConsumeEnergy(singleton);
             
             var storage = singleton.GetAllProducts();
 

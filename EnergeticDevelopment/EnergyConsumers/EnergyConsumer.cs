@@ -1,4 +1,5 @@
 using EnergeticDevelopment.EnergyBase;
+using EnergeticDevelopment.Storage;
 using EnergeticDevelopment.Utilities;
 
 namespace EnergeticDevelopment.EnergyConsumers
@@ -7,5 +8,10 @@ namespace EnergeticDevelopment.EnergyConsumers
     {
         protected override ResourceType Resource => ResourceType.Energy;
         protected abstract decimal ConsumedEnergy { get; }
+
+        public void ConsumeEnergy(ResourcesStorage storage)
+        {
+            storage.SubtractProduct(Resource, ConsumedEnergy);
+        }
     }
 }
