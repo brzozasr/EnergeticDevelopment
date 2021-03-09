@@ -1,4 +1,5 @@
 ﻿using System;
+using EnergeticDevelopment.EnergyBase;
 using EnergeticDevelopment.EnergyConsumers;
 using EnergeticDevelopment.EnergyPlants;
 using EnergeticDevelopment.Mines;
