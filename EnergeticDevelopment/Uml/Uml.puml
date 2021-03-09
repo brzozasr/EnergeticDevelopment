@@ -170,7 +170,7 @@ CoalMine  <.. EnergyAssetsFactory
 FusionPlant <.. EnergyAssetsFactory
 NuclearPlant <.. EnergyAssetsFactory
 SolarPlant <.. EnergyAssetsFactory
-CoalMine <.. EnergyAssetsFactory
+CoalPlant <.. EnergyAssetsFactory
 HadronCollider <.. EnergyAssetsFactory
 MoonMine <.. EnergyAssetsFactory
 UraniumMine <.. EnergyAssetsFactory
