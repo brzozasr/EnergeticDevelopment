@@ -6,12 +6,13 @@ namespace EnergeticDevelopment.Storage
 {
     public sealed class ResourcesStorage
     {
+        public static ResourcesStorage Singleton => Storage.Value;
+        public decimal TotalUsage { get; private set; }
+
         private static readonly Lazy<ResourcesStorage> Storage =
             new Lazy<ResourcesStorage>(() => new ResourcesStorage());
 
-        public static ResourcesStorage Singleton => Storage.Value;
-
-        private Dictionary<ResourceType, decimal> _stockedProducts = new();
+        private readonly Dictionary<ResourceType, decimal> _stockedProducts = new();
 
         private ResourcesStorage()
         {
@@ -25,7 +26,7 @@ namespace EnergeticDevelopment.Storage
                 _stockedProducts.Add(type, 0);
             }
         }
-        
+
         public void StoreProducts(ResourceType product, decimal quantity)
         {
             if (_stockedProducts.ContainsKey(product))
@@ -47,6 +48,7 @@ namespace EnergeticDevelopment.Storage
                     if (_stockedProducts[product] >= quantity)
                     {
                         _stockedProducts[product] -= quantity;
+                        TotalUsage += quantity;
                         return true;
                     }
                     else

@@ -1,9 +1,6 @@
 ﻿using System;
-using EnergeticDevelopment.EnergyBase;
-using EnergeticDevelopment.EnergyConsumers;
-using EnergeticDevelopment.EnergyPlants;
-using EnergeticDevelopment.Mines;
-using EnergeticDevelopment.Storage;
+using System.Threading;
+using EnergeticDevelopment.Simulation;
 
 namespace EnergeticDevelopment
 {
@@ -11,22 +8,17 @@ namespace EnergeticDevelopment
     {
         static void Main(string[] args)
         {
-            var singleton = ResourcesStorage.Singleton;
+            int i = 0;
             
-            var coalMine = new CoalMine();
-            coalMine.ResourcesMining(singleton);
-
-            var coalPlant = new CoalPlant();
-            coalPlant.ProduceEnergy(singleton);
-
-            var newYork = new NewYork();
-            newYork.ConsumeEnergy(singleton);
-            
-            var storage = singleton.GetAllProducts();
-
-            foreach (var (key, value) in storage)
+            while (i < 366)
             {
-                Console.WriteLine($"Key: {key}, value: {value}");
+                Console.Clear();
+                Console.WriteLine($"Day(s): {i}");
+                var simulation = new Simulator();
+                simulation.RunSimulation();
+
+                i++;
+                Thread.Sleep(1000);
             }
         }
     }

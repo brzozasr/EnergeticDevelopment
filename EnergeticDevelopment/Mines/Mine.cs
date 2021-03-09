@@ -12,6 +12,4 @@ namespace EnergeticDevelopment.Mines
             storage.StoreProducts(Resource, ProduceResources);
         }
     }
-    
-    
 }

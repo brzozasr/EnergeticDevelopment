@@ -1,0 +1,209 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class Energy
+{
+    # {abstract} ResourceType Resource
+}
+
+abstract class EnergyConsumer
+{
+    # override ResourceType Resource
+    # {abstract} decimal ConsumedEnergy
+    + void ConsumeEnergy(ResourcesStorage storage)
+}
+
+abstract class EnergyPlant
+{
+    - ResourceType ProducedUnitType
+    # {abstract} decimal ProducedUnit
+    # {abstract} decimal ConsumedResources
+    + virtual void ProduceEnergy(ResourcesStorage storage)
+}
+
+abstract class Mine
+{
+    # {abstract} decimal ProduceResources
+    + virtual void ResourcesMining(ResourcesStorage storage)
+}
+
+Energy <|-- EnergyConsumer
+Energy <|-- EnergyPlant
+Energy <|-- Mine
+
+class NewYork
+{
+    # override decimal ConsumedEnergy
+}
+
+class Poland
+{
+    # override decimal ConsumedEnergy
+}
+
+class World
+{
+    # override decimal ConsumedEnergy
+}
+
+EnergyConsumer <|-- NewYork
+EnergyConsumer <|-- Poland
+EnergyConsumer <|-- World
+
+class AnnihilationPlant
+{
+    # override decimal ProducedUnit
+    # override decimal ConsumedResources
+    # override ResourceType Resource
+}
+
+class CoalPlant
+{
+    # override decimal ProducedUnit
+    # override decimal ConsumedResources
+    # override ResourceType Resource
+}
+
+class FusionPlant
+{
+    # override decimal ProducedUnit
+    # override decimal ConsumedResources
+    # override ResourceType Resource
+}
+
+class NuclearPlant
+{
+    # override decimal ProducedUnit
+    # override decimal ConsumedResources
+    # override ResourceType Resource
+}
+
+class SolarPlant
+{
+    # override decimal ProducedUnit
+    # override decimal ConsumedResources
+    # override ResourceType Resource
+}
+
+EnergyPlant <|-- AnnihilationPlant
+EnergyPlant <|-- CoalPlant
+EnergyPlant <|-- FusionPlant
+EnergyPlant <|-- NuclearPlant
+EnergyPlant <|-- SolarPlant
+
+class CoalMine
+{
+    # override ResourceType Resource
+    # override decimal ProduceResources
+}
+
+class HadronCollider
+{
+    # override ResourceType Resource
+    # override decimal ProduceResources
+    + override void ResourcesMining(ResourcesStorage storage)
+}
+
+class MoonMine
+{
+    # override ResourceType Resource
+    # override decimal ProduceResources
+}
+
+class UraniumMine
+{
+    # override ResourceType Resource
+    # override decimal ProduceResources
+}
+
+Mine <|-- CoalMine
+Mine <|-- HadronCollider
+Mine <|-- MoonMine
+Mine <|-- UraniumMine
+
+class ResourcesStorage
+{
+    + static ResourcesStorage Singleton
+    + decimal TotalUsage
+    - static readonly Lazy<ResourcesStorage> Storage
+    - readonly Dictionary<ResourceType, decimal> _stockedProducts
+    - void PrepareStorage()
+    + void StoreProducts(ResourceType product, decimal quantity)
+    + bool SubtractProduct(ResourceType product, decimal quantity)
+    + Dictionary<ResourceType, decimal> GetAllProducts()
+}
+
+ResourcesStorage <.. Mine
+ResourcesStorage <.. EnergyPlant
+ResourcesStorage <.. EnergyConsumer
+
+class EnergySet
+{
+    + int EnergyAssetsCount  
+    + (EnergyAsset asset, int amount) ColeMine       
+    + (EnergyAsset asset, int amount) UraniumMine
+    + (EnergyAsset asset, int amount) MoonMine
+    + (EnergyAsset asset, int amount) HadronCollider
+    + (EnergyAsset asset, int amount) CoalPlant
+    + (EnergyAsset asset, int amount) SolarPlant
+    + (EnergyAsset asset, int amount) NuclearPlant
+    + (EnergyAsset asset, int amount) FusionPlant
+    + (EnergyAsset asset, int amount) AnnihilationPlant
+}
+    
+abstract class EnergyFactory
+{
+    + IList<Energy> Assets
+    # readonly EnergySet EnergyStartSet
+    + {abstract} void CreateAssets();
+}
+
+class EnergyAssetsFactory
+{
+    + override void CreateAssets()        
+}
+
+EnergyFactory <|-- EnergyAssetsFactory
+EnergyFactory *-- EnergySet
+AnnihilationPlant <.. EnergyAssetsFactory
+CoalMine  <.. EnergyAssetsFactory
+FusionPlant <.. EnergyAssetsFactory
+NuclearPlant <.. EnergyAssetsFactory
+SolarPlant <.. EnergyAssetsFactory
+CoalMine <.. EnergyAssetsFactory
+HadronCollider <.. EnergyAssetsFactory
+MoonMine <.. EnergyAssetsFactory
+UraniumMine <.. EnergyAssetsFactory
+
+
+class Simulator
+{
+    + void RunSimulation()
+    - void Display(ResourcesStorage singleton)
+}
+
+Simulator --> EnergyAssetsFactory
+
+enum EnergyAsset
+{
+    CoalMine,
+    UraniumMine,
+    MoonMine,
+    HadronCollider,
+    CoalPlant,
+    SolarPlant,
+    NuclearPlant,
+    FusionPlant,
+    AnnihilationPlant
+}
+
+enum ResourceType
+{
+    Energy,
+    Coal,
+    Solar,
+    Uranium,
+    Helium,
+    Antimatter
+}
+@enduml
