@@ -1,3 +1,4 @@
+using EnergeticDevelopment.Storage;
 using EnergeticDevelopment.Utilities;
 
 namespace EnergeticDevelopment.EnergyPlants
@@ -7,10 +8,5 @@ namespace EnergeticDevelopment.EnergyPlants
         protected override decimal ProducedUnit => 20000;
         protected override decimal ConsumedResources => 1;
         protected override ResourceType Resource => ResourceType.Helium;
-        
-        public override decimal ProduceEnergy()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

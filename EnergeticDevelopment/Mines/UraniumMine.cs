@@ -7,10 +7,5 @@ namespace EnergeticDevelopment.Mines
     {
         protected override ResourceType Resource => ResourceType.Uranium;
         protected override decimal ProduceResources => 100;
-        
-        public override void ResourcesMining(ResourcesStorage storage)
-        {
-            storage.StoreProducts(Resource, ProduceResources);
-        }
     }
 }

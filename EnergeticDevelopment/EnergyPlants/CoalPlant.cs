@@ -1,3 +1,4 @@
+using EnergeticDevelopment.Storage;
 using EnergeticDevelopment.Utilities;
 
 namespace EnergeticDevelopment.EnergyPlants
@@ -7,10 +8,5 @@ namespace EnergeticDevelopment.EnergyPlants
         protected override decimal ProducedUnit => 7;
         protected override decimal ConsumedResources => 100;
         protected override ResourceType Resource => ResourceType.Coal;
-        
-        public override decimal ProduceEnergy()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

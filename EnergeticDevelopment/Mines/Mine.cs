@@ -6,7 +6,11 @@ namespace EnergeticDevelopment.Mines
     public abstract class Mine : Energy
     {
         protected abstract decimal ProduceResources { get; }
-        public abstract void ResourcesMining(ResourcesStorage storage);
+
+        public virtual void ResourcesMining(ResourcesStorage storage)
+        {
+            storage.StoreProducts(Resource, ProduceResources);
+        }
     }
     
     

@@ -38,22 +38,32 @@ namespace EnergeticDevelopment.Storage
             }
         }
 
-        public void SubtractProduct(ResourceType product, decimal quantity)
+        public bool SubtractProduct(ResourceType product, decimal quantity)
         {
-            if (_stockedProducts.ContainsKey(product))
+            try
             {
-                if (_stockedProducts[product] >= quantity)
+                if (_stockedProducts.ContainsKey(product))
                 {
-                    _stockedProducts[product] -= quantity;
+                    if (_stockedProducts[product] >= quantity)
+                    {
+                        _stockedProducts[product] -= quantity;
+                        return true;
+                    }
+                    else
+                    {
+                        throw new ArgumentException($"There is not enough {product.ToString()} in the storage!");
+                    }
                 }
                 else
                 {
-                    throw new ArgumentException($"There is enough {product.ToString()} in the storage!");
+                    throw new ArgumentException(
+                        $"There is no this kind of product ({product.ToString()}) in the storage!");
                 }
             }
-            else
+            catch (Exception e)
             {
-                throw new ArgumentException($"There is no this kind of product ({product.ToString()}) in the storage!");
+                Console.WriteLine(e.Message);
+                return false;
             }
         }
 
